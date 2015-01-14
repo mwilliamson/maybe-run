@@ -1,0 +1,12 @@
+CONTENTS=`cat`
+BOUNDARY='======================================================'
+
+echo "Script contents:"
+echo "$BOUNDARY"
+echo "$CONTENTS"
+echo "$BOUNDARY"
+read -p "Run it? (y/N) " ANSWER </dev/tty
+
+case "$ANSWER" in
+    [Yy]* ) echo "$CONTENTS" | sh "$@"; break;;
+esac
