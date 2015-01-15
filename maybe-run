@@ -1,14 +1,21 @@
 #!/usr/bin/env sh
 
-CONTENTS=`cat`
-BOUNDARY='======================================================'
+FILE=$(mktemp -t maybe-run.XXXXXXXXXXXXXXXXX) || { echo "Failed creating file"; return; }
+cat > "$FILE"
 
-echo "Script contents:"
-echo "$BOUNDARY"
-echo "$CONTENTS"
-echo "$BOUNDARY"
-read -p "Run it? (y/N) " ANSWER </dev/tty
+while :
+do
+    echo 'Command:' "$@"
+    echo 'What do you want to do with the input?'
+    echo "(s)how    (r)un     (q)uit"
+    read ANSWER </dev/tty
 
-case "$ANSWER" in
-    [Yy]* ) echo "$CONTENTS" | "$@"; break;;
-esac
+    case "$ANSWER" in
+        [Ss]* ) echo ; less -FX "$FILE" ; echo ; ;;
+#        [Ee]* ) ${VISUAL:-${EDITOR:-vim}} "$FILE" ;;
+        [Rr]* ) cat "$FILE" | "$@" ; break;;
+        [Qq]* ) break;;
+    esac
+done
+
+rm "$FILE"
