@@ -3,7 +3,19 @@
 Display scripts and ask whether to run them.
 Useful for scripts you've downloaded off the internet e.g.
 
-    \curl http://example.com/some-script.sh | maybe-run sh
+    $\curl http://example.com/some-script.sh | maybe-run sh
+    Command: sh
+    What do you want to do with the input?
+    (s)how    (r)un     (q)uit
+    s
+
+    echo I am not very good at installing things
+
+    Command: sh
+    What do you want to do with the input?
+    (s)how    (r)un     (q)uit
+    r
+    I am not very good at installing things
 
 The code has bits taken from the post by Darian Moody, as linked below.
 
