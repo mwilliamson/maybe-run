@@ -7,12 +7,12 @@ while :
 do
     echo 'Command:' "$@"
     echo 'What do you want to do with the input?'
-    echo "(s)how    (r)un     (q)uit"
+    echo "(s)how    (e)dit    (r)un     (q)uit"
     read ANSWER </dev/tty
 
     case "$ANSWER" in
         [Ss]* ) echo ; less -FX "$FILE" ; echo ; ;;
-#        [Ee]* ) ${VISUAL:-${EDITOR:-vim}} "$FILE" ;;
+        [Ee]* ) ${VISUAL:-${EDITOR:-nano}} "$FILE" < /dev/tty ;;
         [Rr]* ) cat "$FILE" | "$@" ; break;;
         [Qq]* ) break;;
     esac
